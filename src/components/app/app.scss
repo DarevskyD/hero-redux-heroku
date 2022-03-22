@@ -1,0 +1,51 @@
+img {
+    min-height: 193px;
+}
+
+form {
+	background-color: #fff;
+}
+
+.app {    
+    overflow-y: scroll;
+    background-image: url("../../assets/white-abstract.jpg");
+    background-position: center; 
+  	background-repeat: no-repeat; 
+  	background-size: cover;   
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;             
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 25px 0;
+
+    &__elements {
+        display: flex;
+        flex-wrap: wrap;              
+        width: 650px;
+        height: auto;
+    }
+
+    &__form {				
+        min-width: 390px;        
+    }
+}
+
+.btn-close {
+    transition: transform .3s ease-in-out;
+    &:hover {
+        transform: rotate(90deg);
+    }
+}
+
+.card {
+    margin-right: 15px;       
+    flex: 0 1 30%;
+}
+.card-filter {
+	width: 100%;
+}
+
+
