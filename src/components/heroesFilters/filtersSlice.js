@@ -5,7 +5,7 @@ import {
 } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const api = "/filters";
+const api = "http://localhost:5000/filters";
 const filtersAdapter = createEntityAdapter();
 const initialState = filtersAdapter.getInitialState({
   filtersLoadingStatus: "idle",

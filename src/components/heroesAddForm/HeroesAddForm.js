@@ -6,6 +6,9 @@ import store from "../../store";
 import { createHero } from "../heroesList/heroesSlice";
 import { selectAll } from "../heroesFilters/filtersSlice";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const HeroesAddForm = () => {
   const [heroName, setHeroName] = useState("");
   const [heroDescription, setHeroDescription] = useState("");
@@ -15,7 +18,7 @@ const HeroesAddForm = () => {
   const filters = selectAll(store.getState());
   const dispatch = useDispatch();
 
-  const api = "/heroes";
+  const api = "http://localhost:5000/heroes";
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -58,59 +61,66 @@ const HeroesAddForm = () => {
   };
 
   return (
-    <form onSubmit={onSubmitHandler} className="border p-4 shadow-lg rounded">
-      <div className="mb-3">
-        <label htmlFor="name" className="form-label fs-4">
-          New hero name:
-        </label>
-        <input
-          required
-          type="text"
-          name="name"
-          className="form-control"
-          id="name"
-          placeholder="My name is?"
-          value={heroName}
-          onChange={(e) => setHeroName(e.target.value)}
-        />
-      </div>
+    <>
+      <ToastContainer
+        autoClose={3000}
+        pauseOnFocusLoss={false}
+        draggable={false}
+      />
+      <form onSubmit={onSubmitHandler} className="border p-4 shadow-lg rounded">
+        <div className="mb-3">
+          <label htmlFor="name" className="form-label fs-4">
+            New hero name:
+          </label>
+          <input
+            required
+            type="text"
+            name="name"
+            className="form-control"
+            id="name"
+            placeholder="My name is?"
+            value={heroName}
+            onChange={(e) => setHeroName(e.target.value)}
+          />
+        </div>
 
-      <div className="mb-3">
-        <label htmlFor="text" className="form-label fs-4">
-          Description:
-        </label>
-        <textarea
-          required
-          name="text"
-          className="form-control"
-          id="text"
-          placeholder="What I can do?"
-          value={heroDescription}
-          onChange={(e) => setHeroDescription(e.target.value)}
-          style={{ height: "130px" }}
-        />
-      </div>
-      <div className="mb-3">
-        <label htmlFor="element" className="form-label">
-          Select the hero element:
-        </label>
-        <select
-          required
-          className="form-select"
-          id="element"
-          name="element"
-          value={heroElement}
-          onChange={(e) => setHeroElement(e.target.value)}
-        >
-          <option value="">I own the element...</option>
-          {renderFilters(filters, filtersLoadingStatus)}
-        </select>
-      </div>
+        <div className="mb-3">
+          <label htmlFor="text" className="form-label fs-4">
+            Description:
+          </label>
+          <textarea
+            required
+            name="text"
+            className="form-control"
+            id="text"
+            placeholder="What I can do?"
+            value={heroDescription}
+            onChange={(e) => setHeroDescription(e.target.value)}
+            style={{ height: "130px" }}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="element" className="form-label">
+            Select the hero element:
+          </label>
+          <select
+            required
+            className="form-select"
+            id="element"
+            name="element"
+            value={heroElement}
+            onChange={(e) => setHeroElement(e.target.value)}
+          >
+            <option value="">I own the element...</option>
+            {renderFilters(filters, filtersLoadingStatus)}
+          </select>
+        </div>
 
-      <button type="submit" className="btn btn-primary">
-        Create
-      </button>
-    </form>
+        <button type="submit" className="btn btn-primary">
+          Create
+        </button>
+      </form>
+    </>
   );
 };
 

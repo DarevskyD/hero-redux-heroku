@@ -4,8 +4,9 @@ import {
   createEntityAdapter,
 } from "@reduxjs/toolkit";
 import axios from "axios";
+import { toast } from "react-toastify";
 
-const api = "/heroes";
+const api = "http://localhost:5000/heroes";
 const heroesAdapter = createEntityAdapter();
 const initialState = heroesAdapter.getInitialState({
   heroesLoadingStatus: "idle",
@@ -24,9 +25,11 @@ const heroesSlice = createSlice({
   reducers: {
     createHero: (state, action) => {
       heroesAdapter.addOne(state, action.payload);
+      toast.success(`Hero ${action.payload.name} has been successfully created!`);
     },
-    heroDelete: (state, action) => {
-      heroesAdapter.removeOne(state, action.payload);
+    heroDelete: (state, action) => {      
+      heroesAdapter.removeOne(state, action.payload.id);      
+      toast.warn(`Hero ${action.payload.name} has been removed!"`);
     },
   },
   extraReducers: (builder) => {

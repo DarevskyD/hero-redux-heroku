@@ -21,7 +21,7 @@ const HeroesList = () => {
     }
   );
 
-  const api = "/heroes";
+  const api = "http://localhost:5000/heroes";
   const filteredHeroes = useSelector(filteredHeroesSelector);
   const heroesLoadingStatus = useSelector(
     (state) => state.heroes.heroesLoadingStatus
@@ -34,10 +34,10 @@ const HeroesList = () => {
   }, []);
 
   const onDelete = useCallback(
-    async (id) => {
+    async (hero) => {
       await axios
-        .delete(`${api}/${id}`)
-        .then(dispatch(heroDelete(id)))
+        .delete(`${api}/${hero.id}`)        
+        .then(dispatch(heroDelete(hero)))
         .catch((err) => console.log(err));
     },
     // eslint-disable-next-line
@@ -59,10 +59,10 @@ const HeroesList = () => {
       );
     }
 
-    return arr.map(({ id, ...props }) => {
+    return arr.map(({ id, ...props }) => {      
       return (
         <CSSTransition key={id} timeout={300} classNames="hero">
-          <HeroesListItem {...props} onDelete={() => onDelete(id)} />
+          <HeroesListItem {...props} onDelete={() => onDelete({id, ...props})} />
         </CSSTransition>
       );
     });
