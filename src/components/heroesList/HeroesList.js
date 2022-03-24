@@ -1,4 +1,3 @@
-//import { useHttp } from "../../hooks/http.hook";
 import axios from "axios";
 import { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -28,26 +27,16 @@ const HeroesList = () => {
     (state) => state.heroes.heroesLoadingStatus
   );
   const dispatch = useDispatch();
-  //const { request } = useHttp();
 
   useEffect(() => {
     dispatch(fetchHeroes());
     // eslint-disable-next-line
   }, []);
 
-  // const onDelete = useCallback(
-  //   (id) => {
-  //     request(`http://localhost:3001/heroes/${id}`, "DELETE")
-  //       .then(dispatch(heroDelete(id)))
-  //       .catch((err) => console.log(err));
-  //   },
-  //   // eslint-disable-next-line
-  //   [request]
-  // );
-
   const onDelete = useCallback(
     async (id) => {
-      await axios.delete(`${api}/${id}`)
+      await axios
+        .delete(`${api}/${id}`)
         .then(dispatch(heroDelete(id)))
         .catch((err) => console.log(err));
     },
