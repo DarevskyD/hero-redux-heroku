@@ -35,6 +35,24 @@
       "name": "Hero 6",
       "description": "Description 6",
       "element": "water"
+    },
+    {
+      "id": "b646e0c2-e0ad-4a73-9543-af8a4828ddf2",
+      "name": "ghghg",
+      "description": "ghghg",
+      "element": "fire"
+    },
+    {
+      "id": "f422eaad-7b64-4aff-b5ee-0a48bd59955b",
+      "name": "cbccb",
+      "description": "cbcbc",
+      "element": "wind"
+    },
+    {
+      "id": "294ada4e-4023-46b5-b699-042af000c642",
+      "name": "ghg",
+      "description": "ghg",
+      "element": "fire"
     }
   ],
   "filters": [

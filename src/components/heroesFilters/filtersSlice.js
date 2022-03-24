@@ -3,17 +3,30 @@ import {
   createAsyncThunk,
   createEntityAdapter,
 } from "@reduxjs/toolkit";
-import { useHttp } from "../../hooks/http.hook";
+//import { useHttp } from "../../hooks/http.hook";
+import axios from "axios";
 
+
+const api = "http://localhost:3001/filters";
 const filtersAdapter = createEntityAdapter();
 const initialState = filtersAdapter.getInitialState({
   filtersLoadingStatus: "idle",
   activeFilter: "all",
 });
 
-export const fetchFilters = createAsyncThunk("filtres/fetchFilters", () => {
-  const { request } = useHttp();
-  return request("http://localhost:3001/filters");
+// export const fetchFilters = createAsyncThunk("filtres/fetchFilters", () => {
+//   const { request } = useHttp();
+//   return request("http://localhost:3001/filters");
+// });
+
+export const fetchFilters = createAsyncThunk("filtres/fetchFilters", async () => {
+  const response = await axios
+    .get(api)
+    .catch((err) => {
+      console.log("Error ", err);
+    });
+    console.log(response.data)
+  return response.data;
 });
 
 const filtersSlice = createSlice({

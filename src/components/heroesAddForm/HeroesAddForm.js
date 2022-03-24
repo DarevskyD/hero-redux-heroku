@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { useHttp } from "../../hooks/http.hook";
+//import { useHttp } from "../../hooks/http.hook";
+import axios from "axios";
 import store from "../../store";
 import { createHero } from "../heroesList/heroesSlice";
 import { selectAll } from "../heroesFilters/filtersSlice";
@@ -11,14 +12,14 @@ const HeroesAddForm = () => {
   const [heroDescription, setHeroDescription] = useState("");
   const [heroElement, setHeroElement] = useState("");
 
-  const { filtersLoadingStatus } = useSelector(
-    (state) => state.filters
-  );
+  const { filtersLoadingStatus } = useSelector((state) => state.filters);
   const filters = selectAll(store.getState());
   const dispatch = useDispatch();
-  const { request } = useHttp();
+  //const { request } = useHttp();
 
-  const onSubmitHandler = (e) => {
+  const api = "http://localhost:3001/heroes";
+
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
 
     const newHero = {
@@ -28,7 +29,11 @@ const HeroesAddForm = () => {
       element: heroElement,
     };
 
-    request("http://localhost:3001/heroes", "POST", JSON.stringify(newHero))
+    // request("http://localhost:3001/heroes", "POST", JSON.stringify(newHero))
+    //   .then(dispatch(createHero(newHero)))
+    //   .catch((err) => console.log(err));
+
+    await axios.post(api, newHero)
       .then(dispatch(createHero(newHero)))
       .catch((err) => console.log(err));
 

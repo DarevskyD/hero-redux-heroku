@@ -3,16 +3,28 @@ import {
   createAsyncThunk,
   createEntityAdapter,
 } from "@reduxjs/toolkit";
-import { useHttp } from "../../hooks/http.hook";
+//import { useHttp } from "../../hooks/http.hook";
+import axios from "axios";
 
+const api = "http://localhost:3001/heroes";
 const heroesAdapter = createEntityAdapter();
 const initialState = heroesAdapter.getInitialState({
   heroesLoadingStatus: "idle",
 });
 
-export const fetchHeroes = createAsyncThunk("heroes/fetchHeroes", () => {
-  const { request } = useHttp();
-  return request("http://localhost:3001/heroes");
+// export const fetchHeroes = createAsyncThunk("heroes/fetchHeroes", () => {
+//   const { request } = useHttp();
+//   return request("http://localhost:3001/heroes");
+// });
+
+export const fetchHeroes = createAsyncThunk("heroes/fetchHeroes", async () => {
+  const response = await axios
+    .get(api)
+    .catch((err) => {
+      console.log("Error ", err);
+    });
+    console.log(response.data)
+  return response.data;
 });
 
 const heroesSlice = createSlice({

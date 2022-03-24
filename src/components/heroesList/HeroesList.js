@@ -1,4 +1,5 @@
-import { useHttp } from "../../hooks/http.hook";
+//import { useHttp } from "../../hooks/http.hook";
+import axios from "axios";
 import { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "@reduxjs/toolkit";
@@ -21,26 +22,37 @@ const HeroesList = () => {
     }
   );
 
+  const api = "http://localhost:3001/heroes";
   const filteredHeroes = useSelector(filteredHeroesSelector);
   const heroesLoadingStatus = useSelector(
     (state) => state.heroes.heroesLoadingStatus
   );
   const dispatch = useDispatch();
-  const { request } = useHttp();
+  //const { request } = useHttp();
 
   useEffect(() => {
     dispatch(fetchHeroes());
     // eslint-disable-next-line
   }, []);
 
+  // const onDelete = useCallback(
+  //   (id) => {
+  //     request(`http://localhost:3001/heroes/${id}`, "DELETE")
+  //       .then(dispatch(heroDelete(id)))
+  //       .catch((err) => console.log(err));
+  //   },
+  //   // eslint-disable-next-line
+  //   [request]
+  // );
+
   const onDelete = useCallback(
-    (id) => {
-      request(`http://localhost:3001/heroes/${id}`, "DELETE")
+    async (id) => {
+      await axios.delete(`${api}/${id}`)
         .then(dispatch(heroDelete(id)))
         .catch((err) => console.log(err));
     },
     // eslint-disable-next-line
-    [request]
+    []
   );
 
   if (heroesLoadingStatus === "loading") {
