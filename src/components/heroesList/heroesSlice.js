@@ -6,7 +6,7 @@ import {
 //import { useHttp } from "../../hooks/http.hook";
 import axios from "axios";
 
-const api = "http://localhost:3001/heroes";
+const api = "/heroes";
 const heroesAdapter = createEntityAdapter();
 const initialState = heroesAdapter.getInitialState({
   heroesLoadingStatus: "idle",
