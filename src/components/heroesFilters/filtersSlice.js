@@ -7,7 +7,7 @@ import {
 import axios from "axios";
 
 
-const api = "http://localhost:3001/filters";
+const api = "/filters";
 const filtersAdapter = createEntityAdapter();
 const initialState = filtersAdapter.getInitialState({
   filtersLoadingStatus: "idle",

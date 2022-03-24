@@ -22,7 +22,7 @@ const HeroesList = () => {
     }
   );
 
-  const api = "http://localhost:3001/heroes";
+  const api = "/heroes";
   const filteredHeroes = useSelector(filteredHeroesSelector);
   const heroesLoadingStatus = useSelector(
     (state) => state.heroes.heroesLoadingStatus

@@ -17,7 +17,7 @@ const HeroesAddForm = () => {
   const dispatch = useDispatch();
   //const { request } = useHttp();
 
-  const api = "http://localhost:3001/heroes";
+  const api = "/heroes";
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
