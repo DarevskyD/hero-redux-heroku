@@ -18,7 +18,7 @@ const HeroesAddForm = () => {
   const filters = selectAll(store.getState());
   const dispatch = useDispatch();
 
-  const api = "http://localhost:5000/heroes";
+  const api = "/heroes";
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();

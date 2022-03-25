@@ -6,7 +6,7 @@ import {
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const api = "http://localhost:5000/heroes";
+const api = "/heroes";
 const heroesAdapter = createEntityAdapter();
 const initialState = heroesAdapter.getInitialState({
   heroesLoadingStatus: "idle",
@@ -29,7 +29,7 @@ const heroesSlice = createSlice({
     },
     heroDelete: (state, action) => {      
       heroesAdapter.removeOne(state, action.payload.id);      
-      toast.warn(`Hero ${action.payload.name} has been removed!"`);
+      toast.warn(`Hero ${action.payload.name} has been removed!`);
     },
   },
   extraReducers: (builder) => {
